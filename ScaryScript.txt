@@ -1,0 +1,69 @@
+REM Scary Script
+REM used to spook your non-tech friends and family
+REM Order of operations 
+REM #1 Open up notepad and have a scary note written a bunch of times
+REM #2 Start a powershell and make a whole bunch of random characters
+REM #3 ping the local computer IP
+REM #4 Open another powershell and user restart command as a final touch
+
+REM #1
+DELAY 300
+GUI r
+DELAY 300
+STRING notepad
+ENTER
+
+REM Scary Note
+DELAY 500
+VAR $FOO = 15
+WHILE ($FOO > 0)
+    STRINGLN DO NOT LOOK AT THE MAN IN THE CORNER
+    STRINGLN HE IS NOT REAL
+    
+    $FOO = ($FOO -1)
+END_WHILE
+
+REM #2
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 1000
+
+REM Random Characters
+VAR $VOMITNUM = 200
+WHILE ($VOMITNUM > 0)
+     RANDOM_CHARACTER
+    $VOMITNUM = ($VOMITNUM - 1)
+END_WHILE)
+
+ENTER
+ENTER
+
+REM #3
+CTRL c
+DELAY 200
+STRING ping -t 127.0.0.1
+ENTER
+DELAY 2500
+GUI r
+DELAY 500
+
+REM #4
+STRING powershell
+ENTER
+DELAY 400
+
+REM Comand for Restart
+STRING shutdown /r /t 3
+ENTER
+DELAY 600
+ENTER
+ENTER
+
+
+REM NOTE: There may be a warning after the restart command but it will still run the restart without any intervention
+REM NOTE: Payload execution time ~30 seconds, play arround with delay times for faster run. 
+REM NOTE: WARNING** lowering delay times may cause parts of the script to run too early and mess up the intended effect.
+
+
