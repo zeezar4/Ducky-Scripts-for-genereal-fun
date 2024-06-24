@@ -1,0 +1,68 @@
+REM Open Powershell as admin
+DELAY 1000
+GUI r
+DELAY 200
+STRING powershell
+CTRL SHIFT ENTER
+DELAY 300
+LEFTARROW
+ENTER
+DELAY 300
+
+
+REM Define the URL to open
+STRING $LINK01 = "YOUR YOUTUBE LINK HERE"
+ENTER
+DELAY 100
+STRING $LINK02 = "YOUR YOUTUBE LINK HERE"
+ENTER
+DELAY 100
+STRING $LINK03 = "YOUR YOUTUBE LINK HERE"
+ENTER
+DELAY 100
+
+REM Define the interval in minutes
+STRING $intervalMinutes01 = 10
+ENTER
+DELAY 50
+STRING $intervalMinutes02 = 20
+ENTER
+DELAY 50
+STRING $intervalMinutes03 = 30
+ENTER
+DELAY 50
+
+REM Create a trigger to run every $intervalMinutes minutes
+STRING $trigger01 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes01) -RepetitionDuration (New-TimeSpan -Minutes 60)
+ENTER
+DELAY 50
+STRING $trigger02 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes02) -RepetitionDuration (New-TimeSpan -Minutes 60)
+ENTER
+DELAY 50
+STRING $trigger03 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes03) -RepetitionDuration (New-TimeSpan -Minutes 60)
+ENTER
+DELAY 50
+
+REM Create an action to open the URL in default browser
+STRING $action01 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $potions"
+ENTER
+DELAY 50
+STRING $action02 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $swift"
+ENTER
+DELAY 50
+STRING $action03 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $potter"
+ENTER
+DELAY 50
+
+REM Register the scheduled task
+STRING Register-ScheduledTask -TaskName "Im going into battle" -Trigger $trigger01 -Action $action01 -Description "Opens potions $intervalMinutes01 minutes" -RunLevel Highest
+ENTER
+DELAY 50
+STRING Register-ScheduledTask -TaskName "Shake it off" -Trigger $trigger02 -Action $action02 -Description "Opens swifties dreams $intervalMinutes02 minutes" -RunLevel Highest
+ENTER
+DELAY 50
+STRING Register-ScheduledTask -TaskName "pipe-bomb" -Trigger $trigger03 -Action $action03 -Description "Opens nostalgia $intervalMinutes03 minutes" -RunLevel Highest
+ENTER
+DELAY 50
+STRING exit
+ENTER
