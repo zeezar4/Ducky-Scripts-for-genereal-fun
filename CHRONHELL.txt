@@ -1,3 +1,9 @@
+REM TITLE: Chron Paranoia 
+REM AUTHOR: Shamel
+REM DESCRIPTION: This is a prank that hides in your scheduled tasks and opens up web links of your choice at random times between 0-99 min
+REM TARGET: Windows 10, 11 home computer or PC with admin Powershell access. 
+
+
 REM Open Powershell as admin
 DELAY 1000
 GUI r
@@ -11,58 +17,85 @@ DELAY 300
 
 
 REM Define the URL to open
-STRING $LINK01 = "YOUR YOUTUBE LINK HERE"
-ENTER
-DELAY 100
-STRING $LINK02 = "YOUR YOUTUBE LINK HERE"
-ENTER
-DELAY 100
-STRING $LINK03 = "YOUR YOUTUBE LINK HERE"
+REM Add the links yourself here. 
+
+STRING $URL01 = "YOUR WEB URL"
 ENTER
 DELAY 100
 
-REM Define the interval in minutes
-STRING $intervalMinutes01 = 10
+STRING $URL02 = "YOUR WEB URL"
+ENTER
+DELAY 100
+
+STRING $URL03 = "YOUR WEB URL"
+ENTER
+DELAY 100
+
+
+REM Define the interval in minutes, We use the Random-number function to get a time from 00 to 99 min
+REM The .5 is to give at least 30 seconds in case the random outcome is 00.
+
+STRING $intervalMinutes01 = 
+RANDOM_NUMBER
+RANDOM_NUMBER
+STRING .5
 ENTER
 DELAY 50
-STRING $intervalMinutes02 = 20
+
+STRING $intervalMinutes02 = 
+RANDOM_NUMBER
+RANDOM_NUMBER
+STRING .5
 ENTER
 DELAY 50
-STRING $intervalMinutes03 = 30
+
+STRING $intervalMinutes03 = 
+RANDOM_NUMBER
+RANDOM_NUMBER
+STRING .5
 ENTER
 DELAY 50
 
 REM Create a trigger to run every $intervalMinutes minutes
-STRING $trigger01 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes01) -RepetitionDuration (New-TimeSpan -Minutes 60)
+STRING $trigger01 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes01) -RepetitionDuration (New-TimeSpan -Minutes 99)
 ENTER
 DELAY 50
-STRING $trigger02 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes02) -RepetitionDuration (New-TimeSpan -Minutes 60)
+STRING $trigger02 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes02) -RepetitionDuration (New-TimeSpan -Minutes 99)
 ENTER
 DELAY 50
-STRING $trigger03 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes03) -RepetitionDuration (New-TimeSpan -Minutes 60)
+STRING $trigger03 = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes $intervalMinutes03) -RepetitionDuration (New-TimeSpan -Minutes 99)
 ENTER
 DELAY 50
 
 REM Create an action to open the URL in default browser
-STRING $action01 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $potions"
+REM Dont forget to change the URL names here if you altered them earlier
+
+STRING $action01 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $URL01"
 ENTER
 DELAY 50
-STRING $action02 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $swift"
+STRING $action02 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $URL02"
 ENTER
 DELAY 50
-STRING $action03 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $potter"
+STRING $action03 = New-ScheduledTaskAction -Execute "cmd.exe" -Argument "/c start $URL03"
 ENTER
 DELAY 50
 
 REM Register the scheduled task
-STRING Register-ScheduledTask -TaskName "Im going into battle" -Trigger $trigger01 -Action $action01 -Description "Opens potions $intervalMinutes01 minutes" -RunLevel Highest
+REM Dont forget to make your eddits here too. 
+
+STRING Register-ScheduledTask -TaskName "FUNNY TITLE HERE" -Trigger $trigger01 -Action $action01 -Description "FUNNY DESCRIPTION HERE $intervalMinutes01 minutes" -RunLevel Highest
 ENTER
 DELAY 50
-STRING Register-ScheduledTask -TaskName "Shake it off" -Trigger $trigger02 -Action $action02 -Description "Opens swifties dreams $intervalMinutes02 minutes" -RunLevel Highest
+
+STRING Register-ScheduledTask -TaskName "FUNNY TITLE HERE" -Trigger $trigger02 -Action $action02 -Description "FUNNY DESCRIPTION HERE $intervalMinutes02 minutes" -RunLevel Highest
 ENTER
 DELAY 50
-STRING Register-ScheduledTask -TaskName "pipe-bomb" -Trigger $trigger03 -Action $action03 -Description "Opens nostalgia $intervalMinutes03 minutes" -RunLevel Highest
+
+STRING Register-ScheduledTask -TaskName "FUNNY TITLE HERE" -Trigger $trigger03 -Action $action03 -Description "FUNNY DESCRIPTION HERE $intervalMinutes03 minutes" -RunLevel Highest
 ENTER
 DELAY 50
+
+REM Leave no trace. 
+
 STRING exit
-ENTER
+
